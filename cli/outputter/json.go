@@ -15,7 +15,7 @@ func (j JSONOutputter) Format(x any) (string, error) {
 
 func (j JSONOutputter) Print(x any) error {
 	out, err := j.Format(x)
-	fmt.Print(out)
+	fmt.Println(out)
 	return err
 }
 
