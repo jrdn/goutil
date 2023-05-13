@@ -14,7 +14,7 @@ func (g GoOutputter) Format(x any) (string, error) {
 
 func (g GoOutputter) Print(x any) error {
 	out, err := g.Format(x)
-	fmt.Print(out)
+	fmt.Println(out)
 	return err
 }
 
