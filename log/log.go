@@ -35,11 +35,12 @@ func SetupLogging(options ...Option) {
 	root = x.Logger()
 }
 
-func GetNamed(name string) zerolog.Logger {
-	return root.With().Str("name", name).Logger()
+func GetNamed(name string) *zerolog.Logger {
+	l := root.With().Str("name", name).Logger()
+	return &l
 }
 
-func Get() zerolog.Logger {
+func Get() *zerolog.Logger {
 	pc, _, _, _ := runtime.Caller(1)
 	funcName := runtime.FuncForPC(pc).Name()
 

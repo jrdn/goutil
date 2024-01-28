@@ -7,3 +7,4 @@ type Sliceable[T any] interface {
 type Lengthable[T any] interface {
 	Len() int
 }
+

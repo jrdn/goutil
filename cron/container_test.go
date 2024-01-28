@@ -12,16 +12,17 @@ func TestCron(t *testing.T) {
 	container := NewContainer()
 
 	counter := 0
-	container.Add(NewTask("test task", 5*time.Millisecond, func(ctx context.Context) {
+	container.Add(NewTask("test task", 20*time.Millisecond, func(ctx context.Context) {
 		counter++
 	}))
 
 	container.Start()
-	time.Sleep(1 * time.Second)
+	time.Sleep(2 * time.Second)
 
 	container.Stop()
 
 	t.Log(counter)
 
-	assert.Greater(t, counter, 175)
+	assert.Greater(t, counter, 90)
+	assert.Less(t, counter, 110)
 }

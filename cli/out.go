@@ -5,7 +5,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/j13g/goutil/cli/outputter"
+	"github.com/jrdn/goutil/cli/outputter"
 )
 
 type Outputter interface {
@@ -26,8 +26,6 @@ func SetOutputterByName(s string) error {
 		SetOutputter(outputter.JSONOutputter{})
 	case "go":
 		SetOutputter(outputter.GoOutputter{})
-	case "yaml":
-		SetOutputter(outputter.YAMLOutputter{})
 	default:
 		return errors.New("invalid outputter: " + s)
 	}

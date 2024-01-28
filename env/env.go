@@ -6,8 +6,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/j13g/goutil/types"
 	"github.com/samber/mo"
+
+	"github.com/jrdn/goutil/types"
 )
 
 // allow setting a global environment prefix

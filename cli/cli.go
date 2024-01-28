@@ -3,9 +3,10 @@ package cli
 import (
 	"strings"
 
-	"github.com/j13g/goutil/types"
 	"github.com/samber/mo"
 	"github.com/spf13/cobra"
+
+	"github.com/jrdn/goutil/types"
 )
 
 type cNode struct {
@@ -77,15 +78,25 @@ func (c *CLI) Run() error {
 	}
 
 	if rootCLINode.cmd.IsAbsent() {
-		rootCLINode.cmd = mo.Some(&cobra.Command{
+		cmd := &cobra.Command{
 			Use: c.appName,
-		})
+			PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
+				outputFormat, err := cmd.PersistentFlags().GetString("output")
+				if err != nil {
+					return err
+				}
+				return SetOutputterByName(outputFormat)
+			},
+		}
+		cmd.PersistentFlags().String("output", "", "Output format")
+		rootCLINode.cmd = mo.Some(cmd)
 	}
 
 	c.walk(rootTreeNode)
 
 	// run the CLI
 	cmd, _ := rootCLINode.cmd.Get()
+
 	return cmd.Execute()
 }
 
