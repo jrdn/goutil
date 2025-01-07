@@ -1,0 +1,14 @@
+go.work
+go.work.sum
+
+### JetBrains
+.idea/
+*.iml
+
+### Emacs
+*~
+\#*\#
+.\#*
+
+### macOS
+.DS_Store
