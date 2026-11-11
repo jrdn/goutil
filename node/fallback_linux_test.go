@@ -5,8 +5,11 @@ import (
 	"testing"
 )
 
-func TestMACFallback(t *testing.T) {
-	val, ok := mac()
-	assert.Equal(t, true, ok)
-	assert.NotEmpty(t, val)
+func TestFallbackUnavailable(t *testing.T) {
+	id, ok := fallbackID(
+		func() (string, bool) { return "", false },
+		func() (string, bool) { return "", false },
+	)
+	assert.False(t, ok)
+	assert.Empty(t, id)
 }
