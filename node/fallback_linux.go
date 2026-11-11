@@ -9,16 +9,18 @@ import (
 	"sort"
 )
 
-func getFallbackID() string {
+func fallbackID(systemd func() (string, bool), mac func() (string, bool)) (string, bool) {
 	if id, ok := systemd(); ok {
-		return id
+		return id, true
 	}
-
 	if id, ok := mac(); ok {
-		return id
+		return id, true
 	}
+	return "", false
+}
 
-	panic("everything failed to get a node ID") //TODO
+func getFallbackID() (string, bool) {
+	return fallbackID(systemd, mac)
 }
 
 func systemd() (string, bool) {
